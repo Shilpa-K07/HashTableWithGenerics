@@ -56,7 +56,7 @@ public class LinkedListImplementation<K> {
 
 	public NodeInf search(K key) {
 		NodeInf tempNode = head;
-		while(tempNode != null && tempNode.getNext() != null) {
+		while(tempNode != null) {
 			if(tempNode.getKey().equals(key))
 				return tempNode;
 			tempNode = tempNode.getNext();
@@ -65,8 +65,13 @@ public class LinkedListImplementation<K> {
 	}
 	
 	public void delete(NodeInf node) {
+		if(node.getNext() != null) {
 		node.setKey(node.getNext().getKey());    
         node.setNext(node.getNext().getNext());
+		} else {
+			node.setKey(null);
+			node.setNext(null);
+		}
 	}
 	
 	public int size() {

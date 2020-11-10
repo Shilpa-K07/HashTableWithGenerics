@@ -77,4 +77,44 @@ public class HashMapTest {
 		int frequency = hashMap.get("paranoid");
 		Assert.assertNotEquals(4, frequency);
 	}
-}
+	
+	//UC-3
+	@Test
+	public void givenSentencWordsAreAddedToListWhenRemoveAvoidableWordShouldReturnSame() {
+		String sentence = "Paranoids are not paranoid because they are paranoid but "
+				+ "because they keep putting themselves deliberately into paranoid "
+				+ "avoidable situations";
+		LinkedHashMapImplementation<String, Integer> hashMap = new LinkedHashMapImplementation<>();
+		String[] words = sentence.toLowerCase().split(" ");
+		for(String word : words) {
+			Integer value = hashMap.get(word);
+			if(value == null)
+				value = 1;
+			else
+				value = value + 1;
+			hashMap.add(word, value);
+		}
+		String value = hashMap.remove("avoidable");
+		System.out.println(hashMap);
+		Assert.assertEquals("success", value);
+	}
+	
+	@Test
+	public void givenSentencWordsAreAddedToListWhenRemoveAvoidableWordShouldNotReturnSame() {
+		String sentence = "Paranoids are not paranoid because they are paranoid but "
+				+ "because they keep putting themselves deliberately into paranoid "
+				+ "avoidable situations";
+		LinkedHashMapImplementation<String, Integer> hashMap = new LinkedHashMapImplementation<>();
+		String[] words = sentence.toLowerCase().split(" ");
+		for(String word : words) {
+			Integer value = hashMap.get(word);
+			if(value == null)
+				value = 1;
+			else
+				value = value + 1;
+			hashMap.add(word, value);
+		}
+		String value = hashMap.remove("avoidable");
+		System.out.println(hashMap);
+		Assert.assertNotEquals("not success", value);
+	}
